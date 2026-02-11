@@ -1,0 +1,32 @@
+#include <stdio.h>
+
+int main() {
+    int m, n;
+    int A[10][10], B[10][10];
+
+    scanf("%d %d", &m, &n);
+
+    // First matrix
+    for(int i = 0; i < m; i++) {
+        for(int j = 0; j < n; j++) {
+            scanf("%d", &A[i][j]);
+        }
+    }
+
+    // Second matrix
+    for(int i = 0; i < m; i++) {
+        for(int j = 0; j < n; j++) {
+            scanf("%d", &B[i][j]);
+        }
+    }
+
+    // Print sum directly
+    for(int i = 0; i < m; i++) {
+        for(int j = 0; j < n; j++) {
+            printf("%d ", A[i][j] + B[i][j]);
+        }
+        printf("\n");
+    }
+
+    return 0;
+}
