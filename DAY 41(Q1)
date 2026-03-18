@@ -1,0 +1,48 @@
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
+
+class Queue:
+    def __init__(self):
+        self.front = None
+        self.rear = None
+
+    # Enqueue operation
+    def enqueue(self, x):
+        new_node = Node(x)
+        
+        if self.rear is None:   # Empty queue
+            self.front = self.rear = new_node
+            return
+        
+        self.rear.next = new_node
+        self.rear = new_node
+
+    # Dequeue operation
+    def dequeue(self):
+        if self.front is None:   # Empty queue
+            return -1
+        
+        temp = self.front
+        self.front = self.front.next
+        
+        if self.front is None:   # Queue becomes empty
+            self.rear = None
+        
+        return temp.data
+
+
+# Driver Code
+n = int(input())
+q = Queue()
+
+for _ in range(n):
+    operation = input().split()
+    
+    if operation[0] == "enqueue":
+        q.enqueue(int(operation[1]))
+    
+    elif operation[0] == "dequeue":
+        print(q.dequeue())
