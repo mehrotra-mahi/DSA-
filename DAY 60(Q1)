@@ -1,0 +1,20 @@
+def is_min_heap(arr, n):
+    # Check parent <= children
+    for i in range(n // 2):  # only check till last parent node
+        left = 2 * i + 1
+        right = 2 * i + 2
+
+        if left < n and arr[i] > arr[left]:
+            return "NO"
+        if right < n and arr[i] > arr[right]:
+            return "NO"
+
+    return "YES"
+
+
+# Input
+n = int(input())
+arr = list(map(int, input().split()))
+
+# Output
+print(is_min_heap(arr, n))
