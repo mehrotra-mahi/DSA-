@@ -1,37 +1,56 @@
-#include <iostream>
-#include <unordered_map>
-#include <vector>
-#include <climits>
-using namespace std;
+#include <stdio.h>
+#include <string.h>
+
+#define MAX 1000
+#define LEN 50
 
 int main() {
     int n;
-    cin >> n;
+    scanf("%d", &n);
 
-    unordered_map<string, int> votes;
-    string name;
+    char names[MAX][LEN];
+    int count[MAX] = {0};
+    int unique = 0;
 
     for (int i = 0; i < n; i++) {
-        cin >> name;
-        votes[name]++;
+        char temp[LEN];
+        scanf("%s", temp);
+
+        int found = -1;
+
+        // Check if already exists
+        for (int j = 0; j < unique; j++) {
+            if (strcmp(names[j], temp) == 0) {
+                found = j;
+                break;
+            }
+        }
+
+        if (found != -1) {
+            count[found]++;
+        } else {
+            strcpy(names[unique], temp);
+            count[unique] = 1;
+            unique++;
+        }
     }
 
-    int maxVotes = INT_MIN;
-    string winner = "";
+    int maxVotes = 0;
+    char winner[LEN];
 
-    for (auto it : votes) {
-        if (it.second > maxVotes) {
-            maxVotes = it.second;
-            winner = it.first;
+    for (int i = 0; i < unique; i++) {
+        if (count[i] > maxVotes) {
+            maxVotes = count[i];
+            strcpy(winner, names[i]);
         } 
-        else if (it.second == maxVotes) {
-            if (it.first < winner) {
-                winner = it.first;
+        else if (count[i] == maxVotes) {
+            if (strcmp(names[i], winner) < 0) {
+                strcpy(winner, names[i]);
             }
         }
     }
 
-    cout << winner << " " << maxVotes << endl;
+    printf("%s %d\n", winner, maxVotes);
 
     return 0;
 }
